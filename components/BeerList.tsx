@@ -20,12 +20,14 @@ interface Beer {
 const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  console.log(" this is the current page", currentPage);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response: AxiosResponse = await axios.get(
-          "https://api.punkapi.com/v2/beers?page=1&per_page=10"
+          `https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=10`
         );
         console.log(response.data);
         setBeers(response.data);
@@ -36,6 +38,10 @@ const BeerList: React.FC = () => {
     };
     fetchData();
   }, []);
+
+  const handleButtonPress = (increment: boolean) => {
+    setCurrentPage((prev) => (increment ? prev + 1 : prev - 1), 1);
+  };
 
   const renderItem = ({ item }: { item: Beer }) => {
     return (
@@ -89,26 +95,32 @@ const BeerList: React.FC = () => {
             keyExtractor={(item) => item.id.toString()}
             testID="beer-flatlist"
             ListFooterComponent={
-              <View style={{ height: 50, backgroundColor: "hotpink", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }}>
-             
+              <View
+                style={{
+                  height: 50,
+                  backgroundColor: "hotpink",
+                  flexDirection: "row",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                }}
+              >
                 <TouchableOpacity
                   accessibilityRole="button"
                   accessibilityLabel="Go to previous page"
-                  onPress={() => console.log("previous page")}
+                  onPress={() => handleButtonPress(false)}
                 >
                   <Text>Previous</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   accessibilityRole="button"
                   accessibilityLabel="Go to next page"
-                  onPress={() => console.log("next page")}
+                  onPress={() => handleButtonPress(true)}
                 >
                   <Text>Next</Text>
                 </TouchableOpacity>
               </View>
             }
           />
-
         </>
       )}
     </>
@@ -158,7 +170,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     marginLeft: 16,
   },
-
 });
 
 export default BeerList;
