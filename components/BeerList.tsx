@@ -56,10 +56,12 @@ const BeerList: React.FC = () => {
           />
         </View>
         <View style={styles.textContainer}>
-          <Text ellipsizeMode={"tail"} numberOfLines={1}>
+          <Text style={styles.name} ellipsizeMode={"tail"} numberOfLines={1}>
             {item.name}
           </Text>
-          <Text>{item.tagline}</Text>
+          <Text ellipsizeMode={"tail"} numberOfLines={1}>
+            {item.description}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -105,6 +107,12 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: "column",
     paddingLeft: 16,
+    flex: 9
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 4,
   },
 });
 
