@@ -5,7 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-  Image
+  Image,
 } from "react-native";
 import axios, { AxiosResponse } from "axios";
 
@@ -46,8 +46,8 @@ const BeerList: React.FC = () => {
         onPress={() => console.log("this works")}
         style={styles.container}
       >
-        <View style={styles.circleContainer} >
-        <Image
+        <View style={styles.circleContainer}>
+          <Image
             source={{ uri: item.image_url }}
             style={styles.image}
             resizeMode="contain"
@@ -55,8 +55,10 @@ const BeerList: React.FC = () => {
             accessibilityLabel={`Image of ${item.name}`}
           />
         </View>
-        <View>
-          <Text>{item.name}</Text>
+        <View style={styles.textContainer}>
+          <Text ellipsizeMode={"tail"} numberOfLines={1}>
+            {item.name}
+          </Text>
           <Text>{item.tagline}</Text>
         </View>
       </TouchableOpacity>
@@ -99,7 +101,10 @@ const styles = StyleSheet.create({
   image: {
     width: 40,
     height: 40,
-  
+  },
+  textContainer: {
+    flexDirection: "column",
+    paddingLeft: 16,
   },
 });
 
