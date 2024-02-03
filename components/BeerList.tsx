@@ -21,6 +21,7 @@ const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
   console.log(" this is the current page", currentPage);
 
   useEffect(() => {
@@ -98,7 +99,6 @@ const BeerList: React.FC = () => {
               <View
                 style={{
                   height: 50,
-                  backgroundColor: "hotpink",
                   flexDirection: "row",
                   justifyContent: "space-evenly",
                   alignItems: "center",
@@ -109,14 +109,14 @@ const BeerList: React.FC = () => {
                   accessibilityLabel="Go to previous page"
                   onPress={() => handleButtonPress(false)}
                 >
-                  <Text>Previous</Text>
+                  <AntDesign name="leftcircle" size={35}  color={"#8ED2E9"}/>
                 </TouchableOpacity>
                 <TouchableOpacity
                   accessibilityRole="button"
                   accessibilityLabel="Go to next page"
                   onPress={() => handleButtonPress(true)}
                 >
-                  <Text>Next</Text>
+                  <AntDesign name="rightcircle" size={35}  color={"#8ED2E9"}/>
                 </TouchableOpacity>
               </View>
             }
