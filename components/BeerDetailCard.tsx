@@ -7,7 +7,7 @@ interface BeerDetailCardProps {
 
 const BeerDetailCard = ({ beer }) => {
   return (
-    <View>
+    <View accessible={true} accessibilityLabel={`Drink Card: ${beer.name}`}>
       <View>
         <Image
           source={{ uri: beer.image_url }}
