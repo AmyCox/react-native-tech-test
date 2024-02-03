@@ -19,6 +19,18 @@ const backgroundColors = [
   "#006BF9",
   "#8D8D3E",
   "#D9FDB0",
+  "#F39200",
+  "#79B4A9",
+  "#FF3A20",
+  "#582F0E",
+  "#61506C",
+  "#F7EFD2",
+  "#D4B996",
+  "#B7695C",
+  "#A7C4A2",
+  "#005A5B",
+  "#F7F2E7",
+  "#6A0572",
 ];
 
 function getRandomColor() {
@@ -120,7 +132,7 @@ const BeerDetailCard = ({ beer }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
- 
+    flex: 1,
     justifyContent: "center",
   },
   image: {
