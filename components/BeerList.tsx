@@ -10,19 +10,18 @@ import {
 import axios, { AxiosResponse } from "axios";
 import { AntDesign } from "@expo/vector-icons";
 import { CenteredSpinner } from "./Spinner";
+import { useAppContext } from "../app/AppContext";
+import { Beer } from "../types/types";
 
-interface Beer {
-  name: string;
-  id: number;
-  image_url: string;
-  description: string;
-}
+
 
 const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>(false);
+
+  const { dispatch } = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +77,7 @@ const BeerList: React.FC = () => {
       <TouchableOpacity
         accessibilityRole="button"
         accessibilityLabel="View details of chosen beer"
-        onPress={() => console.log("this works")}
+        onPress={() => {dispatch({ type: "setBeer", payload: item })}}
         style={styles.container}
       >
         <View style={styles.circleContainer}>
