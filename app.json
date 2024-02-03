@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "amy_cox_react_native_test",
-    "slug": "amy_cox_react_native_test",
+    "name": "react-native-tech-test",
+    "slug": "react-native-test",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
