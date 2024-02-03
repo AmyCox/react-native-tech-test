@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios, { AxiosResponse } from "axios";
 import { AntDesign } from "@expo/vector-icons";
+import { CenteredSpinner } from "./Spinner";
 
 interface Beer {
   name: string;
@@ -114,7 +115,7 @@ const BeerList: React.FC = () => {
         <View
           style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
         >
-          <Text>...loading</Text>
+          <CenteredSpinner size="large" color="#8ED2E9" />
         </View>
       ) : (
         <>
