@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { Text, View, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  Image
+} from "react-native";
 import axios, { AxiosResponse } from "axios";
 
 // interface Beer {
@@ -14,7 +21,6 @@ import axios, { AxiosResponse } from "axios";
 const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,15 +40,32 @@ const BeerList: React.FC = () => {
 
   const renderItem = ({ item }) => {
     return (
-     <TouchableOpacity accessibilityRole="button" accessibilityLabel="View details of chosen beer" onPress={() => console.log('this works')} style={styles.container}>
-        <Text>{item.name}</Text>
+      <TouchableOpacity
+        accessibilityRole="button"
+        accessibilityLabel="View details of chosen beer"
+        onPress={() => console.log("this works")}
+        style={styles.container}
+      >
+        <View style={styles.circleContainer} >
+        <Image
+            source={{ uri: item.image_url }}
+            style={styles.image}
+            resizeMode="contain"
+            accessible={true}
+            accessibilityLabel={`Image of ${item.name}`}
+          />
+        </View>
+        <View>
+          <Text>{item.name}</Text>
+          <Text>{item.tagline}</Text>
+        </View>
       </TouchableOpacity>
     );
-  }
+  };
 
   return (
     <View>
-        {loading && <Text>Loading...</Text>}
+      {loading && <Text>Loading...</Text>}
       <FlatList
         data={beers}
         keyExtractor={(item) => item.name}
@@ -53,15 +76,31 @@ const BeerList: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        justifyContent: "center",
-        borderBottomWidth: 1,   
-        borderBottomColor: "#eee",
-        paddingVertical: 10,
-        marginHorizontal: 10,
-        backgroundColor: "white",
-    }
+  container: {
+    flex: 1,
+    // justifyContent: "center",
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+    paddingVertical: 10,
+    marginHorizontal: 10,
+    backgroundColor: "white",
+  },
+  circleContainer: {
+    width: 42,
+    height: 42,
+    borderRadius: 30,
+    overflow: "hidden",
+    marginRight: 16,
+    backgroundColor: "rgba(142, 210, 233, 0.6)", // Adjust the alpha (0.8) as needed
+    borderWidth: 1,
+    borderColor: "#E8E8E8",
+  },
+  image: {
+    width: 40,
+    height: 40,
+  
+  },
 });
 
 export default BeerList;
