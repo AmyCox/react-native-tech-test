@@ -41,7 +41,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
-  console.log("app provider state", state);
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}
