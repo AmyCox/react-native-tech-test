@@ -1,10 +1,11 @@
 import { Text, View } from "react-native";
+import BeerList from "@/components/BeerList";
 
-export default function listScreen() {
+export default function ListScreen(): JSX.Element {
   return (
     <>
       <View>
-        <Text>Amy</Text>
+        <BeerList />
       </View>
     </>
   );
