@@ -21,7 +21,7 @@ const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+  const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>(false);
   console.log(" this is the current page", currentPage);
 
   useEffect(() => {
@@ -40,8 +40,35 @@ const BeerList: React.FC = () => {
     fetchData();
   }, [currentPage]);
 
-  const handleButtonPress = (increment: boolean) => {
-    setCurrentPage((prev) => (increment ? prev + 1 : prev - 1), 1);
+  const renderPaginationButtons = (increment: boolean, disabled: boolean) => {
+    const buttonStyle = disabled
+      ? { opacity: 0.2 } // Disabled style
+      : {};
+    return (
+      <>
+        <TouchableOpacity
+          onPress={() => handlePageClick(increment)}
+          accessibilityLabel={`Change to ${
+            increment ? "next" : "previous"
+          } page`}
+          disabled={disabled}
+          style={buttonStyle}
+          testID={increment ? "pagination-next" : "pagination-previous"}
+        >
+          <AntDesign
+            name={increment ? "rightcircle" : "leftcircle"}
+            size={35}
+            color={"#8ED2E9"}
+          />
+        </TouchableOpacity>
+      </>
+    );
+  };
+
+  const handlePageClick = (increment: boolean) => {
+    setCurrentPage((prevPage) =>
+      increment ? prevPage + 1 : Math.max(prevPage - 1, 1)
+    );
   };
 
   const renderItem = ({ item }: { item: Beer }) => {
@@ -104,20 +131,8 @@ const BeerList: React.FC = () => {
                   alignItems: "center",
                 }}
               >
-                <TouchableOpacity
-                  accessibilityRole="button"
-                  accessibilityLabel="Go to previous page"
-                  onPress={() => handleButtonPress(false)}
-                >
-                  <AntDesign name="leftcircle" size={35}  color={"#8ED2E9"}/>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  accessibilityRole="button"
-                  accessibilityLabel="Go to next page"
-                  onPress={() => handleButtonPress(true)}
-                >
-                  <AntDesign name="rightcircle" size={35}  color={"#8ED2E9"}/>
-                </TouchableOpacity>
+                {renderPaginationButtons(false, currentPage === 1)}
+                {renderPaginationButtons(true, nextButtonDisabled)}
               </View>
             }
           />
