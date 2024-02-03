@@ -37,7 +37,7 @@ const BeerList: React.FC = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const handleButtonPress = (increment: boolean) => {
     setCurrentPage((prev) => (increment ? prev + 1 : prev - 1), 1);
