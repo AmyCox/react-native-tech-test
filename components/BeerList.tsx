@@ -23,7 +23,6 @@ const BeerList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>(false);
-  console.log(" this is the current page", currentPage);
 
   useEffect(() => {
     const fetchData = async () => {
