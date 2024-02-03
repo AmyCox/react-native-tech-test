@@ -6,6 +6,8 @@ import axios, { AxiosResponse } from "axios";
 
 const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
   console.log("here are the beers", beers);
 
   useEffect(() => {
@@ -16,6 +18,7 @@ const BeerList: React.FC = () => {
         );
         console.log(response.data);
         setBeers(response.data);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -25,6 +28,7 @@ const BeerList: React.FC = () => {
 
   return (
     <View>
+        {loading && <Text>Loading...</Text>}
       <FlatList
         data={beers}
         keyExtractor={(item) => item.id}
