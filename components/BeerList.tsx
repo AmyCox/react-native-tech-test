@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, FlatList } from "react-native";
 import axios, { AxiosResponse } from "axios";
+
+
 
 const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
@@ -23,7 +25,11 @@ const BeerList: React.FC = () => {
 
   return (
     <View>
-      <Text>Beer List</Text>
+      <FlatList
+        data={beers}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <Text>{item.name}</Text>}
+      />
     </View>
   );
 };
