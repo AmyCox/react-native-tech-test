@@ -30,17 +30,29 @@ const BeerDetailCard = ({ beer }) => {
   const [dynamicBackgroundColor, setDynamicBackgroundColor] = useState(
     getRandomColor()
   );
+  const [foodPairing, setFoodPairing] = useState("");
 
   useEffect(() => {
     const randomColor = getRandomColor();
     setDynamicBackgroundColor(randomColor);
   }, [beer]);
 
+  //function to get random food pairing
+  const getRandomFoodPairing = () => {
+    const randomIndex = Math.floor(Math.random() * beer.food_pairing.length);
+    const randomFoodPairing = beer.food_pairing[randomIndex];
+    setFoodPairing(randomFoodPairing);
+  };
+
+  useEffect(() => {
+    getRandomFoodPairing();
+  }, [beer]);
+
   return (
     <View
       accessible={true}
       accessibilityLabel={`Drink Card: ${beer.name}`}
-      style={{...styles.container, backgroundColor: dynamicBackgroundColor}}
+      style={{ ...styles.container, backgroundColor: dynamicBackgroundColor }}
     >
       <View style={{ alignItems: "center" }}>
         <Image
@@ -91,6 +103,14 @@ const BeerDetailCard = ({ beer }) => {
           >
             {beer.description}
           </Text>
+
+          {/* Food Pairing */}
+          <Text
+            accessibilityLabel={`Suggested food pairing for ${beer.name}`}
+            style={{ fontFamily: "SpaceMono", textAlign: "center" }}
+          >
+            This one goes wild with {foodPairing}
+          </Text>
         </View>
       </View>
     </View>
@@ -100,7 +120,7 @@ const BeerDetailCard = ({ beer }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-
+ 
     justifyContent: "center",
   },
   image: {

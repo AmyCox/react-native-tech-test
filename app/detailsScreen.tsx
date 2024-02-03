@@ -7,7 +7,7 @@ const Details: React.FC = () => {
   const beer = state.selectedBeer;
   console.log('here is the beer', beer)
   return (
-    <View>
+    <View style={{flex: 1}}>
     
       <BeerDetailCard beer={beer} />
     </View>

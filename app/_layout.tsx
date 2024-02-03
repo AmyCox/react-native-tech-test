@@ -54,12 +54,10 @@ function RootLayoutNav() {
 
   return (
     <AppProvider>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="index" options={{ title: "Beer list" }} />
           <Stack.Screen name="detailsScreen" />
         </Stack>
-      </ThemeProvider>
     </AppProvider>
   );
 }
