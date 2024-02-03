@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
 import { Beer } from "./../types/types";
 
@@ -5,12 +6,41 @@ interface BeerDetailCardProps {
   beer: Beer | null;
 }
 
+const backgroundColors = [
+  "#1FA1B1",
+  "ED713A",
+  "E23B7A",
+  "FAB600",
+  "#8F3E8D",
+  "FDB0D9",
+  "#B11F1F",
+  "#3AED71",
+  "#7A3BE2",
+  "#006BF9",
+  "#8D8D3E",
+  "#D9FDB0",
+];
+
+function getRandomColor() {
+  const randomIndex = Math.floor(Math.random() * backgroundColors.length);
+  return backgroundColors[randomIndex];
+}
+
 const BeerDetailCard = ({ beer }) => {
+  const [dynamicBackgroundColor, setDynamicBackgroundColor] = useState(
+    getRandomColor()
+  );
+
+  useEffect(() => {
+    const randomColor = getRandomColor();
+    setDynamicBackgroundColor(randomColor);
+  }, [beer]);
+
   return (
     <View
       accessible={true}
       accessibilityLabel={`Drink Card: ${beer.name}`}
-      style={styles.container}
+      style={{...styles.container, backgroundColor: dynamicBackgroundColor}}
     >
       <View style={{ alignItems: "center" }}>
         <Image
@@ -70,7 +100,7 @@ const BeerDetailCard = ({ beer }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-  
+
     justifyContent: "center",
   },
   image: {
