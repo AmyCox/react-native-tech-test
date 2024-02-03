@@ -12,8 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { CenteredSpinner } from "./Spinner";
 import { useAppContext } from "../app/AppContext";
 import { Beer } from "../types/types";
-
-
+import { router } from "expo-router";
 
 const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
@@ -77,7 +76,12 @@ const BeerList: React.FC = () => {
       <TouchableOpacity
         accessibilityRole="button"
         accessibilityLabel="View details of chosen beer"
-        onPress={() => {dispatch({ type: "setBeer", payload: item })}}
+        onPress={() => {
+          dispatch({ type: "setBeer", payload: item });
+          router.push({
+            pathname: "/detailsScreen",
+          });
+        }}
         style={styles.container}
       >
         <View style={styles.circleContainer}>
