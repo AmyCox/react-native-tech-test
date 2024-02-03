@@ -59,7 +59,7 @@ const BeerList: React.FC = () => {
           <Text style={styles.name} ellipsizeMode={"tail"} numberOfLines={1}>
             {item.name}
           </Text>
-          <Text ellipsizeMode={"tail"} numberOfLines={1}>
+          <Text style={styles.description} ellipsizeMode={"tail"} numberOfLines={1}>
             {item.description}
           </Text>
         </View>
@@ -113,6 +113,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 4,
+  },
+  description: {
+    fontSize: 14,
+    color: "#555",
   },
 });
 
