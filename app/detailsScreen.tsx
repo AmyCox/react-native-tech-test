@@ -8,7 +8,7 @@ const Details: React.FC = () => {
   console.log('here is the beer', beer)
   return (
     <View>
-      <Text>Details</Text>
+    
       <BeerDetailCard beer={beer} />
     </View>
   );
