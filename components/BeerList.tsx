@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import axios, { AxiosResponse } from "axios";
+import { AntDesign } from "@expo/vector-icons";
 
 // interface Beer {
 //     name: string;
@@ -63,6 +64,9 @@ const BeerList: React.FC = () => {
             {item.description}
           </Text>
         </View>
+        <View style={styles.arrowContainer}>
+          <AntDesign name="caretright" size={18} color="#555" />
+        </View>
       </TouchableOpacity>
     );
   };
@@ -82,7 +86,6 @@ const BeerList: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
     flexDirection: "row",
     borderBottomWidth: 1,
     borderBottomColor: "#eee",
@@ -117,6 +120,12 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: "#555",
+  },
+  arrowContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-end",
+    marginLeft: 16,
   },
 });
 
