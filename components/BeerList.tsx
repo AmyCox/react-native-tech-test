@@ -60,7 +60,11 @@ const BeerList: React.FC = () => {
           <Text style={styles.name} ellipsizeMode={"tail"} numberOfLines={1}>
             {item.name}
           </Text>
-          <Text style={styles.description} ellipsizeMode={"tail"} numberOfLines={1}>
+          <Text
+            style={styles.description}
+            ellipsizeMode={"tail"}
+            numberOfLines={1}
+          >
             {item.description}
           </Text>
         </View>
@@ -70,19 +74,44 @@ const BeerList: React.FC = () => {
       </TouchableOpacity>
     );
   };
-
   return (
-    <View>
-      {loading && <Text>Loading...</Text>}
-      <FlatList
-        data={beers}
-        keyExtractor={(item) => item.name}
-        renderItem={renderItem}
-      />
-    </View>
+    <>
+      {loading ? (
+        <View
+          style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
+        >
+          <Text>...loading</Text>
+        </View>
+      ) : (
+        <>
+          <FlatList
+            data={beers}
+            initialNumToRender={10}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+            testID="beer-flatlist"
+          />
+          <View style={styles.paginationContainer}>
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel="Go to previous page"
+              onPress={() => console.log("previous page")}
+            >
+              <Text>Previous</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel="Go to next page"
+              onPress={() => console.log("next page")}
+            >
+              <Text>Next</Text>
+            </TouchableOpacity> 
+          </View>
+        </>
+      )}
+    </>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -110,7 +139,7 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: "column",
     paddingLeft: 16,
-    flex: 9
+    flex: 9,
   },
   name: {
     fontSize: 16,
@@ -126,6 +155,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-end",
     marginLeft: 16,
+  },
+  paginationContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    paddingVertical: 8,
+    backgroundColor: "transparent",
   },
 });
 
