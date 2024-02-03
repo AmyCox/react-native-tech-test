@@ -10,14 +10,12 @@ import {
 import axios, { AxiosResponse } from "axios";
 import { AntDesign } from "@expo/vector-icons";
 
-// interface Beer {
-//     name: string;
-//     id: number;
-// }
-
-// interface BeerListProps {
-//     item: Beer;
-// }
+interface Beer {
+  name: string;
+  id: number;
+  image_url: string;
+  description: string;
+}
 
 const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
@@ -39,7 +37,7 @@ const BeerList: React.FC = () => {
     fetchData();
   }, []);
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: Beer }) => {
     return (
       <TouchableOpacity
         accessibilityRole="button"
@@ -90,23 +88,27 @@ const BeerList: React.FC = () => {
             renderItem={renderItem}
             keyExtractor={(item) => item.id.toString()}
             testID="beer-flatlist"
+            ListFooterComponent={
+              <View style={{ height: 50, backgroundColor: "hotpink", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }}>
+             
+                <TouchableOpacity
+                  accessibilityRole="button"
+                  accessibilityLabel="Go to previous page"
+                  onPress={() => console.log("previous page")}
+                >
+                  <Text>Previous</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  accessibilityRole="button"
+                  accessibilityLabel="Go to next page"
+                  onPress={() => console.log("next page")}
+                >
+                  <Text>Next</Text>
+                </TouchableOpacity>
+              </View>
+            }
           />
-          <View style={styles.paginationContainer}>
-            <TouchableOpacity
-              accessibilityRole="button"
-              accessibilityLabel="Go to previous page"
-              onPress={() => console.log("previous page")}
-            >
-              <Text>Previous</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              accessibilityRole="button"
-              accessibilityLabel="Go to next page"
-              onPress={() => console.log("next page")}
-            >
-              <Text>Next</Text>
-            </TouchableOpacity> 
-          </View>
+
         </>
       )}
     </>
@@ -156,13 +158,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     marginLeft: 16,
   },
-  paginationContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    paddingVertical: 8,
-    backgroundColor: "transparent",
-  },
+
 });
 
 export default BeerList;
