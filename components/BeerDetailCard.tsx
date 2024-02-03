@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
-import { Beer } from "./../types/types";
 
-interface BeerDetailCardProps {
-  beer: Beer | null;
-}
+
 
 const backgroundColors = [
   "#1FA1B1",
