@@ -26,13 +26,21 @@ const BeerList: React.FC = () => {
     fetchData();
   }, []);
 
+  const renderItem = ({ item }) => {
+    return (
+      <View>
+        <Text>{item.name}</Text>
+      </View>
+    );
+  }
+
   return (
     <View>
         {loading && <Text>Loading...</Text>}
       <FlatList
         data={beers}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Text>{item.name}</Text>}
+        renderItem={renderItem}
       />
     </View>
   );
