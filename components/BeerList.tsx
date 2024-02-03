@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { Text, View, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import axios, { AxiosResponse } from "axios";
 
-interface Beer {
-    name: string;
-}
+// interface Beer {
+//     name: string;
+//     id: number;
+// }
 
-interface BeerListProps {
-    item: Beer;
-}
+// interface BeerListProps {
+//     item: Beer;
+// }
 
 const BeerList: React.FC = () => {
   const [beers, setBeers] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  console.log("here are the beers", beers);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +34,7 @@ const BeerList: React.FC = () => {
 
   const renderItem = ({ item }) => {
     return (
-     <TouchableOpacity style={styles.container}>
+     <TouchableOpacity onPress={() => console.log('this works')} style={styles.container}>
         <Text>{item.name}</Text>
       </TouchableOpacity>
     );
@@ -45,7 +45,7 @@ const BeerList: React.FC = () => {
         {loading && <Text>Loading...</Text>}
       <FlatList
         data={beers}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.name}
         renderItem={renderItem}
       />
     </View>
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderBottomWidth: 1,   
         borderBottomColor: "#eee",
-        padding: 5,
+        paddingVertical: 10,
+        marginHorizontal: 10,
         backgroundColor: "white",
     }
 });

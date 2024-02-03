@@ -1,12 +1,12 @@
-import { Text, View } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import BeerList from "@/components/BeerList";
 
 export default function ListScreen(): JSX.Element {
   return (
     <>
-      <View>
+      <SafeAreaView style={{flex: 1, backgroundColor: "white", height: "100%"}}>
         <BeerList />
-      </View>
+      </SafeAreaView>
     </>
   );
 }
