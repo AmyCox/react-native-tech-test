@@ -34,7 +34,7 @@ const BeerList: React.FC = () => {
 
   const renderItem = ({ item }) => {
     return (
-     <TouchableOpacity onPress={() => console.log('this works')} style={styles.container}>
+     <TouchableOpacity accessibilityRole="button" accessibilityLabel="View details of chosen beer" onPress={() => console.log('this works')} style={styles.container}>
         <Text>{item.name}</Text>
       </TouchableOpacity>
     );
