@@ -7,7 +7,7 @@ const BeerList: React.FC = () => {
 
     const fetchData = async () => {
         try {
-            const response: AxiosResponse = await axios.get('https://api.punkapi.com/v2/beers');
+            const response: AxiosResponse = await axios.get('https://api.punkapi.com/v2/beers?page=1&per_page=10');
             console.log(response.data);
 
         }   
