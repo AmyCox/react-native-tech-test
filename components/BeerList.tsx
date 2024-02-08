@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { View, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+} from "react-native";
 import axios, { AxiosResponse } from "axios";
 import { AntDesign } from "@expo/vector-icons";
 import { CenteredSpinner } from "./Spinner";
@@ -15,6 +21,7 @@ const BeerList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const { dispatch } = useAppContext();
 
@@ -30,6 +37,8 @@ const BeerList: React.FC = () => {
         setLoading(false);
       } catch (error) {
         console.error(error);
+        setError("Error fetching data");
+        setLoading(false);
       }
     };
     fetchData();
@@ -73,7 +82,7 @@ const BeerList: React.FC = () => {
         onPress={() => {
           dispatch({ type: "setBeer", payload: item });
           router.push({
-            pathname: "/detailsScreen",
+            pathname: "/DetailsScreen",
           });
         }}
       />
@@ -86,6 +95,12 @@ const BeerList: React.FC = () => {
           style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
         >
           <CenteredSpinner size="large" color="#8ED2E9" />
+        </View>
+      ) : error ? (
+        <View
+          style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
+        >
+          <Text style={{ color: "red" }}>{error}</Text>
         </View>
       ) : (
         <>
