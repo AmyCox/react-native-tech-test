@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import BeerDetailCard from "../components/BeerDetailCard";
-import { useAppContext } from "../app/AppContext";
+import { useAppContext } from "./AppContext";
 
 const Details: React.FC = () => {
   const { state } = useAppContext();
